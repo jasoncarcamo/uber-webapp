@@ -1,4 +1,5 @@
 import React from "react";
+import PassengerToken from "../../services/PassengerToken/PassengerToken";
 
 export default class Signup extends React.Component{
     constructor(props){
@@ -8,6 +9,13 @@ export default class Signup extends React.Component{
             error: ""
         };
     };
+
+    componentDidMount(){
+        if(PassengerToken.hasToken()){
+            console.log(PassengerToken.hasToken());
+            this.props.history.push("/passenger");
+        };
+    }
 
     handleSignUp = ()=>{
         const testingDriverSignup = {
@@ -41,6 +49,10 @@ export default class Signup extends React.Component{
             })
             .then( resData => {
                 console.log("Successful", resData.token);
+
+                PassengerToken.setToken(resData.token);
+
+                this.props.history.push("/passenger");
             })
             .catch( err => {
                 console.log(err);

@@ -1,0 +1,16 @@
+#menu-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18.25em;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    transform: translate(-100%, 0);
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+.menu-open{
+    transform: translate(0, 0) !important;
+}

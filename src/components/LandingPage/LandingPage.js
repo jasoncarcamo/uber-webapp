@@ -1,7 +1,15 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import PassengerToken from "../../services/PassengerToken/PassengerToken";
 
 export default class LandingPage extends React.Component{
+    
+    componentDidMount(){
+        if(PassengerToken.hasToken()){
+            this.props.history.push("/passenger");
+        };
+    };
+
     render(){
         return (
             <section>

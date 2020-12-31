@@ -21,7 +21,7 @@ export default class Map extends React.Component{
                     width: "100%",
                     padding: 0,
                     margin: 0,
-                    zIndex: 2
+                    zIndex: -1
                 }}>
 
             </GoogleMap>
