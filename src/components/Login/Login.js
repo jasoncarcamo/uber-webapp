@@ -37,6 +37,8 @@ export default class Login extends React.Component{
                 this.setState({
                     token: resData.token
                 });
+
+                this.props.history().push("/passenger");
             })
             .catch( err => {
                 console.log(err);
