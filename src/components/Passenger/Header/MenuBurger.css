@@ -1,7 +1,7 @@
 #menu-burger-container{
     display: flex;
     position: absolute;
-    left: 50em;
+    left: 150%;
     flex-direction: column;
     justify-content: space-between;
     width: 2em;
