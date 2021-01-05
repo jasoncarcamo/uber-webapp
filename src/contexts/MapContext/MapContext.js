@@ -1,6 +1,4 @@
 import React from "react";
-import LocationService from "../../services/LocationServices/LocationServices";
-import LocationServices from "../../services/LocationServices/LocationServices";
 
 const MapContext = React.createContext({
     passengerLocation: {}
@@ -20,16 +18,33 @@ export class MapProvider extends React.Component{
     }
 
     componentDidMount(){
-        this.getLocation();
+        this.watchLocation();
     };
 
-    getLocation(){
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position)=>{
-                console.log(position);
+    positionSuccess = (position)=>{
+        this.setLocation(position);
+    }
 
-                this.setLocation(position);
-            });
+    postionError = (error)=>{
+        console.log(error);
+    }
+
+    options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maxiumAge: 0
+    };
+
+    getLocation = ()=>{
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.positionSuccess, this.postionError, this.options);
+        };
+    }
+
+    //handles positon on location change
+    watchLocation = ()=>{
+        if(navigator.geolocation){
+            navigator.geolocation.watchPosition(this.positionSuccess, this.postionError, this.options);
         };
     }
 
@@ -41,7 +56,7 @@ export class MapProvider extends React.Component{
 
         this.setState({
             passengerLocation: newPassengerLocation
-        })
+        });
     }
 
     render(){

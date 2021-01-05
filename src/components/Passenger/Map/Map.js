@@ -24,16 +24,10 @@ export default class Map extends React.Component{
             <GoogleMap
                 center={position}
                 zoom={10}
-                mapContainerStyle={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    flex: 1,
-                    height: "100%",
-                    width: "100%",
-                    padding: 0,
-                    margin: 0,
-                    zIndex: -1
+                mapContainerStyle={this.props.mapContainerStyle}
+                options={{
+                    fullscreenControl: false,
+                    mapTypeControl: false
                 }}>
                     <Marker position={position}/>
             </GoogleMap>

@@ -7,13 +7,14 @@ export default class Header extends React.Component{
         return (
             <header id="menu-container">
                 <MenuBurger/>
-                
+
                 <h2>Uber Passenger</h2>
 
                 <nav>
                     <ul>
                         <li>Home</li>
                         <li>Account</li>
+                        <li>Sign Out</li>
                     </ul>
                 </nav>
             </header>
