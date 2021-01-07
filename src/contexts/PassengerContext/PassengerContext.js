@@ -4,7 +4,9 @@ const PassengerContext = React.createContext({
     passenger: {}
 });
 
-export default class PassengerProvider extends React.Component{
+export default PassengerContext;
+
+export class PassengerProvider extends React.Component{
     constructor(props){
         super(props);
         this.state = {

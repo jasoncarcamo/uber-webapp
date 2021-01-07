@@ -6,20 +6,36 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import AppContext, {AppProvider} from "./contexts/AppContext/AppContext";
 import MapContext, {MapProvider} from "./contexts/MapContext/MapContext";
+import PassengerContext, {PassengerProvider} from "./contexts/PassengerContext/PassengerContext";
+import TripsContext, {TripsProvider} from "./contexts/TripsContext/TripsContext";
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <MapProvider>
-                <MapContext.Consumer>
-                    { mapContext => (
-                        <AppProvider
-                            mapContext={mapContext}>
-                            <App/>
-                        </AppProvider>
+            <PassengerProvider>
+                <PassengerContext.Consumer>
+                    { passengerContext => (
+                        <TripsProvider>
+                            <TripsContext.Consumer>
+                                { tripsContext => (
+                                    <MapProvider>
+                                        <MapContext.Consumer>
+                                            { mapContext => (
+                                                <AppProvider
+                                                    mapContext={mapContext}
+                                                    passengerContext={passengerContext}
+                                                    tripsContext={tripsContext}>
+                                                    <App/>
+                                                </AppProvider>
+                                            )}
+                                        </MapContext.Consumer>
+                                    </MapProvider>
+                                )}
+                            </TripsContext.Consumer>
+                        </TripsProvider>
                     )}
-                </MapContext.Consumer>
-            </MapProvider>
+                </PassengerContext.Consumer>
+            </PassengerProvider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

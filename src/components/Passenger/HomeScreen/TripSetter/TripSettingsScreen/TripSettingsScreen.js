@@ -17,7 +17,9 @@ export default class TripSettingsScreen extends React.Component{
                     <fieldset id="trip-settings-fieldset">
                         <input id="" type="text" placeholder="Enter pickup location"/>
                         <input id="" type="text" placeholder="Where to?"/>
+
                         <DateTimePicker/>
+                        
                         <button id="trip-settings-confirm">Looks Good</button>
                     </fieldset>
                 </form>
