@@ -31,13 +31,6 @@
     padding: 0;
 }
 
-#trip-settings-fieldset input{
-    display: inline-block;
-    width: 20em;
-    height: 2.5em;
-    margin: 1em auto;
-}
-
 #trip-settings-confirm{
     display: block;
     height: 3em;
