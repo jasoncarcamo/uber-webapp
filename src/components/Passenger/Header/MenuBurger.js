@@ -7,8 +7,8 @@ export default class MenuBurger extends React.Component{
         const menuBurger =  document.getElementById("menu-burger-container");
         const menuContainer = document.getElementById("menu-container");
 
-        menuBurger.classList.toggle("menu-burger-container-toggle");
         menuContainer.classList.toggle("menu-open");
+        menuBurger.classList.toggle("menu-burger-container-toggle");
     };
 
     render(){

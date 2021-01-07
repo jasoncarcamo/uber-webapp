@@ -6,7 +6,7 @@ export default class HomeScreen extends React.Component{
     render(){
         return (
             <section>
-                
+
                 <TripSetter history={this.props.history}/>
                 <Map mapContainerStyle={mapContainerStyle}/>
             </section>
@@ -20,7 +20,7 @@ const mapContainerStyle = {
     left: "50%",
     transform: "translate(-50%, 0)",
     flex: 1,
-    height: "50vh",
+    height: "55vh",
     width: "100%",
     padding: 0,
     margin: 0,
