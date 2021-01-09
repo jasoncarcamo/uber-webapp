@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "./Header/Header";
-import Map from "./Map/Map";
 import AppContext from "../../contexts/AppContext/AppContext";
 import {Route} from "react-router-dom";
 import HomeScreen from "./HomeScreen/HomeScreen";
+import ConfrimTripScreen from "./ConfirmTripScreen/ConfirmTripScreen";
 
 export default class Passenger extends React.Component{
     constructor(props){
@@ -22,6 +22,7 @@ export default class Passenger extends React.Component{
                 <Route path="/passenger" component={Header}></Route>
 
                 <Route exact path="/passenger" component={HomeScreen}></Route>
+                <Route exact path="/passenger/confirm_trip" component={ConfrimTripScreen}></Route>
             </section>
         );
     };

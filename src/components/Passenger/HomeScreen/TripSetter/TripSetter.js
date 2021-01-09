@@ -1,6 +1,7 @@
 import React from "react";
 import "./TripSetter.css";
 import TripSettingsScreen from "./TripSettingsScreen/TripSettingsScreen";
+import AppContext from "../../../../contexts/AppContext/AppContext";
 
 export default class TripSetter extends React.Component{
     constructor(props){
@@ -10,10 +11,16 @@ export default class TripSetter extends React.Component{
         };
     };
 
+    static contextType = AppContext;
+
+    displayValue = ({tripsContext})=>{
+        return tripsContext.trip.pick_up_address ? tripsContext.trip.pick_up_address : "";
+    }
+
     renderSetterSection = ()=>{
         return (
             <section id="trip-setter-section">
-                <input id="trip-setter-input" type="text" placeholder="Where to?" onClick={this.toggleTripSettings}/>
+                <input id="trip-setter-input" type="text" placeholder="Where to?" defaultValue={this.displayValue(this.context)} onClick={this.toggleTripSettings}/>
                 <button id="trip-setter-button" onClick={this.toggleTripSettings}>Now</button>
             </section>
         );

@@ -2,6 +2,7 @@ import React from "react";
 import "./TripSettingsScreen.css";
 import DateTimePicker from "./DateTimePicker/DateTimePicker";
 import DestinationSetters from "./DestinationSetters/DestinationSetters";
+import {Link} from "react-router-dom";
 
 export default class TripSettingsScreen extends React.Component{
 
@@ -20,7 +21,9 @@ export default class TripSettingsScreen extends React.Component{
                         <DestinationSetters/>
                         <DateTimePicker/>
 
-                        <button id="trip-settings-confirm">Looks Good</button>
+                        <button id="trip-settings-confirm">
+                            <Link to="/passenger/confirm_trip">Looks Good!</Link>
+                        </button>
                     </fieldset>
                 </form>
             </section>

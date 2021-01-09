@@ -1,0 +1,14 @@
+#confirm_trip_section{
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 15em;
+    height: 2.5em;
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    left: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
