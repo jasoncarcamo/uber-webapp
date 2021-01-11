@@ -2,7 +2,9 @@ import React from "react";
 
 const TripsContext = React.createContext({
     trip: {},
-    editTripInput: ()=>{}
+    editTripInput: ()=>{},
+    editTripLocations: ()=>{},
+    cancelTrip: ()=>{}
 });
 
 export default TripsContext;
@@ -15,7 +17,7 @@ export class TripsProvider extends React.Component{
                 pick_up_address: "",
                 drop_off_address: "",
                 pick_up_lat: "",
-                pick_up_lat: "",
+                pick_up_lng: "",
                 drop_off_lat: "",
                 drop_off_lng: "",
                 scheduled_datetime: new Date(),
@@ -33,13 +35,42 @@ export class TripsProvider extends React.Component{
             trip: editTrip
         });
     }
+
+    editTripLocations = (location)=>{
+        const trip = this.state.trip;
+
+        for(const [key, value] of Object.entries(location)){
+            trip[key] = value;
+        };
+
+        this.setState({
+            trip
+        });
+    }
+
+    cancelTrip = ()=>{
+        this.setState({
+            trip: {
+                pick_up_address: "",
+                drop_off_address: "",
+                pick_up_lat: "",
+                pick_up_lng: "",
+                drop_off_lat: "",
+                drop_off_lng: "",
+                scheduled_datetime: new Date(),
+                request_confirmed: false
+            }
+        });
+    }
     
     render(){
         const value = {
             trip: this.state.trip,
-            editTripInput: this.editTripInput
+            editTripInput: this.editTripInput,
+            editTripLocations: this.editTripLocations,
+            cancelTrip: this.cancelTrip
         };
-        console.log(this.state.trip.scheduled_datetime)
+        
         return (
             <TripsContext.Provider value={value}>
                 {this.props.children}

@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import React from "react";
 import Map from "../Map/Map";
 import ConfirmOptions from "./ConfirmOptions/ConfirmOptions";
@@ -14,7 +13,7 @@ export default class ConfirmTripScreen extends React.Component{
             <section>
                 <button onClick={this.goBack}>Back</button>
                 <Map mapContainerStyle={mapStyle}/>
-                <ConfirmOptions/>
+                <ConfirmOptions history={this.props.history}/>
             </section>
         );
     };
