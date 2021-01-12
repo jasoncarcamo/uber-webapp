@@ -8,16 +8,24 @@ export default class DirectionRenderer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            response: ""
+            response: "",
+            loaded: false
         }
     }
 
     static contextType = AppContext;
 
     directionsCallBack = (response)=>{
+        if(this.state.loaded){
+            return;
+        };
+
         this.setState({
-            response
+            response,
+            loaded: true
         });
+
+        console.log(response);
 
         return;
     }
@@ -39,8 +47,8 @@ export default class DirectionRenderer extends React.Component{
                 <DirectionsService
                   // required
                   options={{ // eslint-disable-line react-perf/jsx-no-new-object-as-prop
-                    destination: this.context.tripsContext.trip.drop_off_address,
-                    origin: this.context.tripsContext.trip.pick_up_address,
+                    destination: this.props.destination,
+                    origin: this.props.origin,
                     travelMode: "DRIVING"
                   }}
                   // required
@@ -56,7 +64,7 @@ export default class DirectionRenderer extends React.Component{
                 >
                 </DirectionsService>
 
-                {this.state.response !== null && this.context.tripsContext.toggleDirections ? this.renderDirections() : ""}
+                {this.state.response ? this.renderDirections() : ""}
             </>
         );
     };

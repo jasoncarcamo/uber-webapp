@@ -4,6 +4,12 @@ import AppContext from "../../../contexts/AppContext/AppContext";
 import DirectionRenderer from "./DirectionRenderer/DirectionRenderer";
 
 export default class Map extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            renderDirections: false
+        }
+    }
 
     static contextType = AppContext;
 
@@ -17,8 +23,12 @@ export default class Map extends React.Component{
     }
 
     renderDirections = ()=>{
+        const origin = this.context.tripsContext.trip.pick_up_address;
+        const destination = this.context.tripsContext.trip.drop_off_address;
 
-        return <DirectionRenderer/>;
+        console.log(origin, destination)
+
+        return <DirectionRenderer origin={origin} destination={destination}/>;
     }
 
     renderTripLocations = ({tripsContext})=>{
@@ -66,8 +76,6 @@ export default class Map extends React.Component{
                     <p>Drop off location</p>
                     </div>
                 </InfoWindow>
-
-                {/*this.context.mapContext.renderDirections ? this.renderDirections() : ""*/}
             </>
         );
     }
@@ -88,7 +96,6 @@ export default class Map extends React.Component{
     }
 
     render(){
-
         let position;
 
         if(this.context.mapContext.passengerLocation.lat){
@@ -96,7 +103,7 @@ export default class Map extends React.Component{
         }else{
             position = this.center;
         };
-
+        console.log(this.context)
         return (
             <GoogleMap
                 center={position}
@@ -109,6 +116,7 @@ export default class Map extends React.Component{
                     <Marker position={this.center}/>
                     {this.renderPassengerLocation(this.context)}
                     {this.renderTripLocations(this.context)}
+                    {this.context.mapContext.renderDirections ? this.renderDirections() : ""}
             </GoogleMap>
         )
     }

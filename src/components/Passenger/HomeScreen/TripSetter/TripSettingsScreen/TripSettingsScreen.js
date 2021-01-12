@@ -14,7 +14,7 @@ export default class TripSettingsScreen extends React.Component{
     };
 
     toggleDirections = (e)=>{
-
+        e.preventDefault();
         this.context.mapContext.toggleDirections();
         this.props.history.push("/passenger/request_trip");
     }
@@ -30,7 +30,7 @@ export default class TripSettingsScreen extends React.Component{
                         <DestinationSetters/>
                         <DateTimePicker/>
 
-                        <button id="trip-settings-confirm" onClick={this.toggleDirections}>
+                        <button id="trip-settings-confirm" type="button" onClick={this.toggleDirections}>
                             Looks Good!
                         </button>
                     </fieldset>

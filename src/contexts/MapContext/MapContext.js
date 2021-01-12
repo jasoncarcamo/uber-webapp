@@ -64,7 +64,7 @@ export class MapProvider extends React.Component{
 
     toggleDirections = ()=>{
         this.setState({
-            renderDirections: !this.state.renderDirections
+            renderDirections: true
         });
     }
 
