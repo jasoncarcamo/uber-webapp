@@ -22,7 +22,7 @@ export default class TripSettingsScreen extends React.Component{
                         <DateTimePicker/>
 
                         <button id="trip-settings-confirm">
-                            <Link to="/passenger/confirm_trip">Looks Good!</Link>
+                            <Link to="/passenger/request_trip">Looks Good!</Link>
                         </button>
                     </fieldset>
                 </form>

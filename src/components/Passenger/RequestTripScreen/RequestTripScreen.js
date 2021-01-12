@@ -2,7 +2,7 @@ import React from "react";
 import Map from "../Map/Map";
 import ConfirmOptions from "./ConfirmOptions/ConfirmOptions";
 
-export default class ConfirmTripScreen extends React.Component{
+export default class RequestTripScreen extends React.Component{
 
     goBack = ()=>{
         this.props.history.goBack();

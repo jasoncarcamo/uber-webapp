@@ -3,7 +3,9 @@ const TripInstanceService = {
         return this.getTrip();
     },
     getTrip(){
-        return window.localStorage.getItem("passenger-trip");
+        const tripInstance = window.localStorage.getItem("passenger-trip");
+        
+        return tripInstance;
     },
     saveTrip(trip){
         const tripInstance = JSON.stringify(trip);

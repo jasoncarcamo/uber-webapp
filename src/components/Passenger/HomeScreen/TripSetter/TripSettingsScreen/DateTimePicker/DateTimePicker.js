@@ -16,6 +16,6 @@ export default class DateTimePicker extends React.Component{
             type="datetime-local" 
             name="scheduled_datetime" 
             value={this.context.tripsContext.trip.scheduled_datetime} onChange={this.editDateTime} 
-            mindate={new Date()}/>;
+            min={new Date()}/>;
     };
 };
