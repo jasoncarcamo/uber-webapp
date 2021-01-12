@@ -3,12 +3,21 @@ import "./TripSettingsScreen.css";
 import DateTimePicker from "./DateTimePicker/DateTimePicker";
 import DestinationSetters from "./DestinationSetters/DestinationSetters";
 import {Link} from "react-router-dom";
+import AppContext from "../../../../../contexts/AppContext/AppContext";
 
 export default class TripSettingsScreen extends React.Component{
+
+    static contextType = AppContext;
 
     toggleTripSetting = ()=>{
         this.props.toggleTripSettings();
     };
+
+    toggleDirections = (e)=>{
+
+        this.context.mapContext.toggleDirections();
+        this.props.history.push("/passenger/request_trip");
+    }
 
     render(){
         return (
@@ -21,8 +30,8 @@ export default class TripSettingsScreen extends React.Component{
                         <DestinationSetters/>
                         <DateTimePicker/>
 
-                        <button id="trip-settings-confirm">
-                            <Link to="/passenger/request_trip">Looks Good!</Link>
+                        <button id="trip-settings-confirm" onClick={this.toggleDirections}>
+                            Looks Good!
                         </button>
                     </fieldset>
                 </form>

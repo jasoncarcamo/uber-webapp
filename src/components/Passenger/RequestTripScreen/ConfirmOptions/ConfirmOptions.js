@@ -10,12 +10,14 @@ export default class ConfirmOptions extends React.Component{
     requestTrip = ()=>{
         const trip = this.context.tripsContext.trip;
 
+        // save instance of requested trip
         TripInstanceService.saveTrip(trip);
 
         this.props.history.push("/passenger/trip_confirmed");        
     }
 
     cancelTrip = ()=>{
+
         this.context.tripsContext.cancelTrip();
 
         this.props.history.push("/");

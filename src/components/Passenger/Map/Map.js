@@ -1,6 +1,7 @@
 import React from "react";
 import {GoogleMap, Marker, InfoWindow} from "@react-google-maps/api";
 import AppContext from "../../../contexts/AppContext/AppContext";
+import DirectionRenderer from "./DirectionRenderer/DirectionRenderer";
 
 export default class Map extends React.Component{
 
@@ -13,6 +14,11 @@ export default class Map extends React.Component{
 
     onLoad = (infoWindow)=>{
         console.log(infoWindow)
+    }
+
+    renderDirections = ()=>{
+
+        return <DirectionRenderer/>;
     }
 
     renderTripLocations = ({tripsContext})=>{
@@ -33,9 +39,16 @@ export default class Map extends React.Component{
             lng: drop_off_lng
         };
 
-        for(const [key, value] of Object.entries({tripPickUpLocation, ...tripDropOffLocation})){
-            if(!value){
-                return;
+        const directions = {
+            tripPickUpLocation, 
+            tripDropOffLocation
+        };
+
+        for(const [key, value] of Object.entries(directions)){
+            for(const [directionKey, directionValue] of Object.entries(directions[key])){
+                if(!directionValue){
+                    return;
+                }
             };
         };
 
@@ -47,11 +60,14 @@ export default class Map extends React.Component{
                     <p>Pick up location</p>
                     </div>
                 </InfoWindow>
+                
                 <InfoWindow position={tripDropOffLocation} onLoad={this.onLoad}>
                     <div>
                     <p>Drop off location</p>
                     </div>
                 </InfoWindow>
+
+                {/*this.context.mapContext.renderDirections ? this.renderDirections() : ""*/}
             </>
         );
     }

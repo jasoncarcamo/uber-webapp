@@ -17,7 +17,6 @@ export default class Passenger extends React.Component{
     static contextType = AppContext;
 
     render(){
-        console.log(this.context);
         return (
             <section>
                 <Route path="/passenger" component={Header}></Route>

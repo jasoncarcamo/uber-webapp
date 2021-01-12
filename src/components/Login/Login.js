@@ -12,7 +12,6 @@ export default class LogIn extends React.Component{
 
     componentDidMount(){
         if(PassengerToken.hasToken()){
-            console.log(PassengerToken.hasToken());
             this.props.history.push("/passenger");
         };
     }
@@ -41,7 +40,6 @@ export default class LogIn extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData);
                 this.setState({
                     token: resData.token
                 });
@@ -51,7 +49,6 @@ export default class LogIn extends React.Component{
                 this.props.history.push("/passenger");
             })
             .catch( err => {
-                console.log(err);
 
                 this.setState({
                     error: err.error

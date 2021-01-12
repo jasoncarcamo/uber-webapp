@@ -14,7 +14,6 @@ export class AppProvider extends React.Component{
             tripsContext: this.props.tripsContext
         };
 
-        console.log(this.props)
         return (
             <AppContext.Provider value={value}>
                 {this.props.children}

@@ -12,7 +12,6 @@ export default class Signup extends React.Component{
 
     componentDidMount(){
         if(PassengerToken.hasToken()){
-            console.log(PassengerToken.hasToken());
             this.props.history.push("/passenger");
         };
     }
@@ -48,15 +47,12 @@ export default class Signup extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log("Successful", resData.token);
 
                 PassengerToken.setToken(resData.token);
 
                 this.props.history.push("/passenger");
             })
             .catch( err => {
-                console.log(err);
-
                 this.setState({
                     error: err.error
                 });

@@ -1,7 +1,9 @@
 import React from "react";
 
 const MapContext = React.createContext({
-    passengerLocation: {}
+    passengerLocation: {},
+    renderDirections: false,
+    toggleDirections: ()=>{}
 });
 
 export default MapContext;
@@ -13,7 +15,8 @@ export class MapProvider extends React.Component{
             passengerLocation: {
                 lat: "",
                 lng: ""
-            }
+            },
+            renderDirections: false
         }
     }
 
@@ -31,7 +34,7 @@ export class MapProvider extends React.Component{
 
     options = {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 10000,
         maxiumAge: 0
     };
 
@@ -59,9 +62,17 @@ export class MapProvider extends React.Component{
         });
     }
 
+    toggleDirections = ()=>{
+        this.setState({
+            renderDirections: !this.state.renderDirections
+        });
+    }
+
     render(){
         const value = {
-            passengerLocation: this.state.passengerLocation
+            passengerLocation: this.state.passengerLocation,
+            renderDirections: this.state.renderDirections,
+            toggleDirections: this.toggleDirections
         };
 
         return(

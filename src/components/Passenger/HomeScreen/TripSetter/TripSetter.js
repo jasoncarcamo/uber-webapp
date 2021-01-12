@@ -33,6 +33,6 @@ export default class TripSetter extends React.Component{
     }
 
     render(){
-        return this.state.renderTripSettings ? <TripSettingsScreen toggleTripSettings={this.toggleTripSettings}/> : this.renderSetterSection()
+        return this.state.renderTripSettings ? <TripSettingsScreen toggleTripSettings={this.toggleTripSettings} history={this.props.history}/> : this.renderSetterSection()
     };
 };
