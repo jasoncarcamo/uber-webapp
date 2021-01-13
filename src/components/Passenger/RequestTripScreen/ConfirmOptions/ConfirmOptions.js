@@ -10,6 +10,10 @@ export default class ConfirmOptions extends React.Component{
     requestTrip = ()=>{
         const trip = this.context.tripsContext.trip;
 
+        if(!trip.pick_up_address && !trip.drop_off_address){
+            return
+        }
+
         // save instance of requested trip
         TripInstanceService.saveTrip(trip);
 
@@ -18,7 +22,11 @@ export default class ConfirmOptions extends React.Component{
 
     cancelTrip = ()=>{
 
+        TripInstanceService.removeTrip();
+
         this.context.tripsContext.cancelTrip();
+
+        this.context.mapContext.toggleDirections(false);
 
         this.props.history.push("/");
     }

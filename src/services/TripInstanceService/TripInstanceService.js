@@ -3,8 +3,10 @@ const TripInstanceService = {
         return this.getTrip();
     },
     getTrip(){
-        const tripInstance = window.localStorage.getItem("passenger-trip");
-        
+        let tripInstance = window.localStorage.getItem("passenger-trip");
+
+        tripInstance = JSON.parse(tripInstance);
+
         return tripInstance;
     },
     saveTrip(trip){
@@ -13,7 +15,7 @@ const TripInstanceService = {
         return window.localStorage.setItem("passenger-trip", tripInstance);
     },
     removeTrip(){
-        return window.localStorage.getItem("passenger-trip");
+        return window.localStorage.removeItem("passenger-trip");
     }
 };
 

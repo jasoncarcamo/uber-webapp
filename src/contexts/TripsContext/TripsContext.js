@@ -20,6 +20,8 @@ export class TripsProvider extends React.Component{
                 pick_up_lng: "",
                 drop_off_lat: "",
                 drop_off_lng: "",
+                distance: "",
+                duration: "",
                 scheduled_datetime: new Date(),
                 request_confirmed: false
             }
@@ -57,9 +59,26 @@ export class TripsProvider extends React.Component{
                 pick_up_lng: "",
                 drop_off_lat: "",
                 drop_off_lng: "",
+                distance: "",
+                duration: "",
                 scheduled_datetime: new Date(),
                 request_confirmed: false
             }
+        });
+    }
+
+    editDestinationInfo = (response)=>{
+        const trip = this.state.trip;
+
+        if(!response){
+            return;
+        }
+
+        trip.distance = response.routes[0].legs[0].distance;
+        trip.duration = response.routes[0].legs[0].duration;
+
+        this.setState({
+            trip
         });
     }
     
@@ -68,9 +87,10 @@ export class TripsProvider extends React.Component{
             trip: this.state.trip,
             editTripInput: this.editTripInput,
             editTripLocations: this.editTripLocations,
-            cancelTrip: this.cancelTrip
+            cancelTrip: this.cancelTrip,
+            editDestinationInfo: this.editDestinationInfo
         };
-        
+        console.log(this.state)
         return (
             <TripsContext.Provider value={value}>
                 {this.props.children}

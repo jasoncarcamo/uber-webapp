@@ -92,13 +92,19 @@ export default class Map extends React.Component{
             lng
         };
 
+        for(const [key, value] of Object.entries(passengerLocation)){
+            if(!value){
+                return <Marker position={this.center}/>;
+            };
+        };
+
         return <Marker position={passengerLocation}/>;
     }
 
     render(){
         let position;
 
-        if(this.context.mapContext.passengerLocation.lat){
+        if(this.context.mapContext.passengerLocation.lat !== ""){
             position = this.context.mapContext.passengerLocation;
         }else{
             position = this.center;
@@ -108,16 +114,24 @@ export default class Map extends React.Component{
             <GoogleMap
                 center={position}
                 zoom={10}
-                mapContainerStyle={this.props.mapContainerStyle}
+                mapContainerStyle={mapContainerStyle}
                 options={{
                     fullscreenControl: false,
                     mapTypeControl: false
                 }}>
-                    <Marker position={this.center}/>
                     {this.renderPassengerLocation(this.context)}
                     {this.renderTripLocations(this.context)}
                     {this.context.mapContext.renderDirections ? this.renderDirections() : ""}
             </GoogleMap>
-        )
-    }
+        );
+    };
+};
+
+const mapContainerStyle = {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    zIndex: -1,
+    width: "100%",
+    height: "80vh",
 }

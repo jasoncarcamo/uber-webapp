@@ -15,7 +15,11 @@ export default class TripSettingsScreen extends React.Component{
 
     toggleDirections = (e)=>{
         e.preventDefault();
-        this.context.mapContext.toggleDirections();
+
+        if(this.context.tripsContext.pick_up_address !== ""){
+            this.context.mapContext.toggleDirections(true);
+        };
+
         this.props.history.push("/passenger/request_trip");
     }
 

@@ -16,9 +16,17 @@ export default class DirectionRenderer extends React.Component{
     static contextType = AppContext;
 
     directionsCallBack = (response)=>{
+
+        // this sops from over limiting
         if(this.state.loaded){
             return;
         };
+
+        if(!response){
+            return;
+        };
+
+        this.context.tripsContext.editDestinationInfo(response);
 
         this.setState({
             response,

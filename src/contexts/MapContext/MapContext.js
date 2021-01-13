@@ -24,10 +24,6 @@ export class MapProvider extends React.Component{
         this.watchLocation();
     };
 
-    positionSuccess = (position)=>{
-        this.setLocation(position);
-    }
-
     postionError = (error)=>{
         console.log(error);
     }
@@ -40,18 +36,19 @@ export class MapProvider extends React.Component{
 
     getLocation = ()=>{
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.positionSuccess, this.postionError, this.options);
+            navigator.geolocation.getCurrentPosition(this.setLocation, this.postionError, this.options);
         };
     }
 
     //handles positon on location change
     watchLocation = ()=>{
         if(navigator.geolocation){
-            navigator.geolocation.watchPosition(this.positionSuccess, this.postionError, this.options);
+            navigator.geolocation.watchPosition(this.setLocation, this.postionError, this.options);
         };
     }
 
     setLocation = (position)=>{
+        console.log(position)
         const newPassengerLocation = {
             lat: Number(position.coords.latitude),
             lng: Number(position.coords.longitude)
@@ -62,9 +59,9 @@ export class MapProvider extends React.Component{
         });
     }
 
-    toggleDirections = ()=>{
+    toggleDirections = (bool)=>{
         this.setState({
-            renderDirections: true
+            renderDirections: bool
         });
     }
 
