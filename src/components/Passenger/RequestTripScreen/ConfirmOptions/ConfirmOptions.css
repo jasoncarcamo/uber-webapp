@@ -9,19 +9,43 @@
     left: 50%;
     z-index: 0;
     transform: translate(-50%, 0);
+    transition: all 1s ease-in-out;
     background-color: white;
     overflow: auto;
 }
 
+.open-confirm-section{
+    height: 100vh !important;
+    min-height: unset !important;
+}
+
 #confirm_trip_info{
     padding: 0 1em 1em 1em;
-    margin: 0;
+    width: 95%;
+    margin: 0 auto;
     text-align: center;
+    transition: all 1s ease-in-out;
+}
+
+.open-trip-info{
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    padding: 0 !important
+}
+
+#confirm-trip-info-button{
+    display: block;
+    width: 15em;
+    height: 2.8em;
+    margin: 0 auto;
+    border: 1px solid green;
 }
 
 #confirm-trip-buttons-container{
     display: flex;
-    position: relative;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;

@@ -4,6 +4,12 @@ import AppContext from "../../../../contexts/AppContext/AppContext";
 import TripInstanceService from "../../../../services/TripInstanceService/TripInstanceService";
 
 export default class ConfirmOptions extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            confirmTrip: false
+        }
+    }
 
     static contextType = AppContext;
 
@@ -33,7 +39,7 @@ export default class ConfirmOptions extends React.Component{
 
     calculatePrice = (distance)=>{
         let newDistance = Number(distance.split(" ")[0]);
-        let price = 6 + ( newDistance- 2);
+        let price = 6 + ( newDistance - 2);
 
         if(!distance){
             return "";
@@ -50,6 +56,8 @@ export default class ConfirmOptions extends React.Component{
                 <p><strong>Distance:</strong> {tripsContext.trip.distance}</p>
                 <p><strong>Duration:</strong> {tripsContext.trip.duration}</p>
                 <p><strong>Price:</strong> {this.calculatePrice(tripsContext.trip.distance)}</p>
+
+                {this.state.confirmTrip ? <button id="confirm-trip-info-button" onClick={this.requestTrip}>Confirm</button> : ""}
             </section>
         )
     }
@@ -57,6 +65,18 @@ export default class ConfirmOptions extends React.Component{
     editTrip = ()=>{
         this.props.history.goBack();
     } 
+
+    confirmTrip = ()=>{
+        const confirmSection = document.getElementById("confirm_trip_section");
+        const tripInfo = document.getElementById("confirm_trip_info");
+
+        confirmSection.classList.add("open-confirm-section")
+        tripInfo.classList.add("open-trip-info")
+
+        this.setState({
+            confirmTrip: true
+        });
+    }
     
     render(){
         console.log(this.context);
@@ -65,7 +85,7 @@ export default class ConfirmOptions extends React.Component{
                 {this.renderTripInfo(this.context)}
                 
                 <div id="confirm-trip-buttons-container">
-                    <button onClick={this.requestTrip}>Confirm</button>
+                    {!this.state.confirmTrip ? <button onClick={this.confirmTrip}>Confirm</button> : ""}
                     <button onClick={this.editTrip}>Edit</button>
                     <button onClick={this.cancelTrip}>Cancel</button>
                 </div>
