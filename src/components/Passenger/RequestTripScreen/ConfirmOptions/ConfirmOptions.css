@@ -1,7 +1,8 @@
 #confirm_trip_section{
     position: absolute;
     width: 100%;
-    height: 45vh;
+    height: 40vh;
+    min-height: 15em;
     margin: 0;
     padding: 0;
     bottom: 0;
@@ -9,11 +10,24 @@
     z-index: 0;
     transform: translate(-50%, 0);
     background-color: white;
+    overflow: auto;
 }
 
 #confirm_trip_info{
-    padding: 0 1em;
+    padding: 0 1em 1em 1em;
     margin: 0;
     text-align: center;
-    border: 1px solid black;
+}
+
+#confirm-trip-buttons-container{
+    display: flex;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#confirm-trip-buttons-container button{
+    width: 100%;
+    height: 2.8em;
 }

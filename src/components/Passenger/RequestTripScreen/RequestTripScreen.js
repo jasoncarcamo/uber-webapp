@@ -4,16 +4,11 @@ import ConfirmOptions from "./ConfirmOptions/ConfirmOptions";
 
 export default class RequestTripScreen extends React.Component{
 
-    goBack = ()=>{
-        this.props.history.goBack();
-    };
-
     render(){
         return (
             <section>
-                <button onClick={this.goBack}>Back</button>
                 <Map mapContainerStyle={mapStyle}/>
-                <ConfirmOptions history={this.props.history} goBack={this.goBack}/>
+                <ConfirmOptions history={this.props.history}/>
             </section>
         );
     };
@@ -26,4 +21,5 @@ const mapStyle = {
     zIndex: -1,
     width: "100%",
     height: "55vh",
+    minHeight: "19.6em"
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./TripSetter.css";
-import TripSettingsScreen from "./TripSettingsScreen/TripSettingsScreen";
+import TripSettingsScreen from "../../EditTripScreen/EditTripScreen";
 import AppContext from "../../../../contexts/AppContext/AppContext";
 
 export default class TripSetter extends React.Component{
@@ -42,12 +42,17 @@ export default class TripSetter extends React.Component{
     }
 
     toggleTripSettings = ()=>{
-        this.setState({
-            renderTripSettings: !this.state.renderTripSettings
-        });
+        this.props.history.push("/passenger/edit_trip")
     }
 
     render(){
-        return this.state.renderTripSettings ? <TripSettingsScreen toggleTripSettings={this.toggleTripSettings} history={this.props.history}/> : this.renderSetterSection()
+        return (
+            <section id="trip-setter-section">
+
+                <input id="trip-setter-input" type="text" placeholder="Where to?" defaultValue={this.displayValue(this.context)} onClick={this.toggleTripSettings}/>
+
+                {this.renderTripSetterButtons()}
+            </section>
+        );
     };
 };

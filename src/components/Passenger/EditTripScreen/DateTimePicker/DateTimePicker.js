@@ -1,6 +1,6 @@
 import React from "react";
 import "./DateTimePicker.css";
-import AppContext from "../../../../../../contexts/AppContext/AppContext";
+import AppContext from "../../../../contexts/AppContext/AppContext";
 
 export default class DateTimePicker extends React.Component{
 

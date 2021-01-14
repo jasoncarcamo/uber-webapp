@@ -1,5 +1,5 @@
 import React from "react";
-import AppContext from "../../../../../../contexts/AppContext/AppContext";
+import AppContext from "../../../../contexts/AppContext/AppContext";
 import "./DestinationSetters.css";
 import PlacesAutocomplete from "./PlacesAutocomplete/PlacesAutocomplete";
 

@@ -1,11 +1,11 @@
 import React from "react";
-import "./TripSettingsScreen.css";
+import "./EditTripScreen.css";
 import DateTimePicker from "./DateTimePicker/DateTimePicker";
 import DestinationSetters from "./DestinationSetters/DestinationSetters";
 import {Link} from "react-router-dom";
-import AppContext from "../../../../../contexts/AppContext/AppContext";
+import AppContext from "../../../contexts/AppContext/AppContext";
 
-export default class TripSettingsScreen extends React.Component{
+export default class EditTripScreen extends React.Component{
 
     static contextType = AppContext;
 
@@ -36,16 +36,24 @@ export default class TripSettingsScreen extends React.Component{
             };
         };
 
+        if(requirements.pick_up_address === requirements.drop_off_address){
+            const error = "Pick up address and drop off address can not be the same destinations"
+
+            this.context.tripsContext.setError(error);
+
+            return;
+        };
+
         this.context.mapContext.toggleDirections(true);
 
         this.props.history.push("/passenger/request_trip");
     }
 
-    renderError = ({tripsContext})=>{
+    displayError = ({tripsContext})=>{
         const error = tripsContext.error;
 
         if(error){
-            return <p className="requirements-error">{error}</p>;
+            return error;
         } else{
             return ""
         };
@@ -62,7 +70,7 @@ export default class TripSettingsScreen extends React.Component{
                         <DestinationSetters/>
                         <DateTimePicker/>
 
-                        {this.renderError(this.context)}
+                        <p className="requirements-error">{this.displayError(this.context)}</p>
                         <button id="trip-settings-confirm" type="button" onClick={this.toggleDirections}>
                             Looks Good!
                         </button>

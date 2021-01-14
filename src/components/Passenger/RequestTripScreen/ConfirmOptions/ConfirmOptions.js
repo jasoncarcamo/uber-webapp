@@ -35,23 +35,27 @@ export default class ConfirmOptions extends React.Component{
         let newDistance = Number(distance.split(" ")[0]);
         let price = 6 + ( newDistance- 2);
 
-        return Math.ceil(price);
+        if(!distance){
+            return "";
+        };
+
+        return `$${Math.ceil(price)}`;
     }
 
     renderTripInfo = ({tripsContext})=>{
         return (
             <section id="confirm_trip_info">
-                <p>Pick up: {tripsContext.trip.pick_up_address}</p>
-                <p>Drop off: {tripsContext.trip.drop_off_address}</p>
-                <p>Distance: {tripsContext.trip.distance}</p>
-                <p>Duration: {tripsContext.trip.duration}</p>
-                <p>Price: {this.calculatePrice(tripsContext.trip.distance)}</p>
+                <p><strong>Pick up:</strong> {tripsContext.trip.pick_up_address}</p>
+                <p><strong>Drop off:</strong> {tripsContext.trip.drop_off_address}</p>
+                <p><strong>Distance:</strong> {tripsContext.trip.distance}</p>
+                <p><strong>Duration:</strong> {tripsContext.trip.duration}</p>
+                <p><strong>Price:</strong> {this.calculatePrice(tripsContext.trip.distance)}</p>
             </section>
         )
     }
 
     editTrip = ()=>{
-        this.props.goBack();
+        this.props.history.goBack();
     } 
     
     render(){
@@ -59,9 +63,12 @@ export default class ConfirmOptions extends React.Component{
         return (
             <section id="confirm_trip_section">
                 {this.renderTripInfo(this.context)}
-                <button onClick={this.requestTrip}>Confirm</button>
-                <button onClick={this.editTrip}>Edit</button>
-                <button onClick={this.cancelTrip}>Cancel</button>
+                
+                <div id="confirm-trip-buttons-container">
+                    <button onClick={this.requestTrip}>Confirm</button>
+                    <button onClick={this.editTrip}>Edit</button>
+                    <button onClick={this.cancelTrip}>Cancel</button>
+                </div>
             </section>
         );
     };

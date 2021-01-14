@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     min-height: 100vh;
+    padding: 0;
     background-color: white;
 }
 
@@ -38,4 +39,6 @@
 
 .requirements-error{
     text-align: center;
+    width: 17em;
+    margin: .5em auto;
 }
