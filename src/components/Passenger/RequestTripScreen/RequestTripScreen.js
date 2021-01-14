@@ -13,7 +13,7 @@ export default class RequestTripScreen extends React.Component{
             <section>
                 <button onClick={this.goBack}>Back</button>
                 <Map mapContainerStyle={mapStyle}/>
-                <ConfirmOptions history={this.props.history}/>
+                <ConfirmOptions history={this.props.history} goBack={this.goBack}/>
             </section>
         );
     };
@@ -21,9 +21,9 @@ export default class RequestTripScreen extends React.Component{
 
 const mapStyle = {
     position: "absolute",
-    bottom: 0,
+    top: 0,
     left: 0,
     zIndex: -1,
     width: "100%",
-    height: "80vh",
+    height: "55vh",
 }

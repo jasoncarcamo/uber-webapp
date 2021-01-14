@@ -114,7 +114,8 @@ export default class Map extends React.Component{
             <GoogleMap
                 center={position}
                 zoom={10}
-                mapContainerStyle={mapContainerStyle}
+                mapContainerClassName={this.props.className}
+                mapContainerStyle={this.props.mapContainerStyle}
                 options={{
                     fullscreenControl: false,
                     mapTypeControl: false
@@ -126,12 +127,3 @@ export default class Map extends React.Component{
         );
     };
 };
-
-const mapContainerStyle = {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    zIndex: -1,
-    width: "100%",
-    height: "80vh",
-}

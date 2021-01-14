@@ -17,10 +17,9 @@ export default class HomeScreen extends React.Component{
 const mapContainerStyle = {
     position: "absolute",
     bottom: 0,
-    left: "50%",
-    transform: "translate(-50%, 0)",
+    left: 0,
     flex: 1,
-    height: "55vh",
+    height: "100vh",
     width: "100%",
     padding: 0,
     margin: 0,

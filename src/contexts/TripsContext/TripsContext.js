@@ -2,9 +2,11 @@ import React from "react";
 
 const TripsContext = React.createContext({
     trip: {},
+    error: "",
     editTripInput: ()=>{},
     editTripLocations: ()=>{},
-    cancelTrip: ()=>{}
+    cancelTrip: ()=>{},
+    setError: ()=>{}
 });
 
 export default TripsContext;
@@ -22,9 +24,10 @@ export class TripsProvider extends React.Component{
                 drop_off_lng: "",
                 distance: "",
                 duration: "",
-                scheduled_datetime: new Date(),
+                scheduled_date_time: "",
                 request_confirmed: false
-            }
+            },
+            error: ""
         };
     };
 
@@ -34,7 +37,8 @@ export class TripsProvider extends React.Component{
         editTrip[target.name] = target.value;
 
         this.setState({
-            trip: editTrip
+            trip: editTrip,
+            error: ""
         });
     }
 
@@ -46,7 +50,8 @@ export class TripsProvider extends React.Component{
         };
 
         this.setState({
-            trip
+            trip,
+            error: ""
         });
     }
 
@@ -61,36 +66,46 @@ export class TripsProvider extends React.Component{
                 drop_off_lng: "",
                 distance: "",
                 duration: "",
-                scheduled_datetime: new Date(),
+                scheduled_date_time: "",
                 request_confirmed: false
-            }
+            },
+            error: ""
         });
     }
 
     editDestinationInfo = (response)=>{
         const trip = this.state.trip;
-
+        console.log(response)
         if(!response){
             return;
         }
 
-        trip.distance = response.routes[0].legs[0].distance;
-        trip.duration = response.routes[0].legs[0].duration;
+        trip.distance = response.routes[0].legs[0].distance.text;
+        trip.duration = response.routes[0].legs[0].duration.text;
 
         this.setState({
-            trip
+            trip,
+            error: ""
+        });
+    }
+
+    setError = (error)=>{
+        this.setState({
+            error
         });
     }
     
     render(){
         const value = {
             trip: this.state.trip,
+            error: this.state.error,
             editTripInput: this.editTripInput,
             editTripLocations: this.editTripLocations,
             cancelTrip: this.cancelTrip,
-            editDestinationInfo: this.editDestinationInfo
+            editDestinationInfo: this.editDestinationInfo,
+            setError: this.setError
         };
-        console.log(this.state)
+        
         return (
             <TripsContext.Provider value={value}>
                 {this.props.children}

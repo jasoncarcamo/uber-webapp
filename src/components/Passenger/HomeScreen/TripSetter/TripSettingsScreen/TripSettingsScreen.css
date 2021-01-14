@@ -10,16 +10,15 @@
 
 #trip-settings-cancel{
     display: block;
-
     width: 5.5em;
-    height: 2.5em;
+    height: 2.8em;
     margin: 5.5em 0 2.5em 2.5em;
 }
 
 #trip-settings-form{
     border: 1px solid black;
     padding: 0;
-    margin: 4.5em auto 0 auto;
+    margin: 3em auto 0 auto;
     width: 100%;
 }
 
@@ -35,4 +34,8 @@
     display: block;
     height: 3em;
     margin: 2em 0 0 0;
+}
+
+.requirements-error{
+    text-align: center;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import AppContext from "../../../../../../contexts/AppContext/AppContext";
 import "./DestinationSetters.css";
-import PlacesAutocomplete from "./PlacesAutocomplete/PlacesAutoComplete";
+import PlacesAutocomplete from "./PlacesAutocomplete/PlacesAutocomplete";
 
 export default class DestinationSetters extends React.Component{
 
@@ -28,7 +28,7 @@ export default class DestinationSetters extends React.Component{
         for(const [key, value] of Object.entries(position)){
 
             location[`${name.join("_")}_${key}`] = value;
-            
+
         };
 
         this.context.tripsContext.editTripLocations(location);
@@ -37,8 +37,15 @@ export default class DestinationSetters extends React.Component{
     render(){
         return (
             <>  
-                <PlacesAutocomplete className="trip-settings-input" type="text" placeholder="Enter pickup location" name="pick_up_address" value={this.context.tripsContext.trip.pick_up_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
-                <PlacesAutocomplete className="trip-settings-input" type="text" placeholder="Where to?" name="drop_off_address" value={this.context.tripsContext.trip.drop_off_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
+                <label className="autocomplete-label" htmlFor="pick_up_address_input">
+                    Pick up address
+                    <PlacesAutocomplete id="pick_up_address_input" className="trip-settings-input" type="text" placeholder="Enter pickup location" name="pick_up_address" value={this.context.tripsContext.trip.pick_up_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
+                </label>
+                
+                <label className="autocomplete-label" htmlFor="drop_off_address_input">
+                    Drop off address
+                    <PlacesAutocomplete id="drop_off_address_input" className="trip-settings-input" type="text" placeholder="Where to?" name="drop_off_address" value={this.context.tripsContext.trip.drop_off_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
+                </label>
             </>
         );
     };

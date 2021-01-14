@@ -17,11 +17,26 @@ export default class TripSetter extends React.Component{
         return tripsContext.trip.pick_up_address ? tripsContext.trip.pick_up_address : "";
     }
 
+    cancelTrip = ()=>{
+        this.context.tripsContext.cancelTrip();
+
+        this.context.mapContext.toggleDirections(false);
+    }
+
+    renderTripSetterButtons = ()=>{
+        return (
+            <div id="trip-setter-buttons-container">
+                <button id="trip-setter-button" onClick={this.toggleTripSettings}>Now</button>
+                {this.context.tripsContext.trip.pick_up_address ? <button onClick={this.cancelTrip}>Cancel</button> : ""}
+            </div>
+        )
+    }
+
     renderSetterSection = ()=>{
         return (
             <section id="trip-setter-section">
                 <input id="trip-setter-input" type="text" placeholder="Where to?" defaultValue={this.displayValue(this.context)} onClick={this.toggleTripSettings}/>
-                <button id="trip-setter-button" onClick={this.toggleTripSettings}>Now</button>
+                {this.renderTripSetterButtons()}
             </section>
         );
     }

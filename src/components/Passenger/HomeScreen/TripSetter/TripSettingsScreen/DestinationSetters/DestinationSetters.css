@@ -1,6 +1,5 @@
-.trip-settings-input{
-    display: inline-block;
-    width: 20em;
-    height: 2.5em;
-    margin: 1em auto;
+.autocomplete-label{
+    width: 17em;
+    padding: 0;
+    margin: .5em auto;
 }

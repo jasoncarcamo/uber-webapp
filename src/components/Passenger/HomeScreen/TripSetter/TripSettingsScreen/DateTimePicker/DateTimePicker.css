@@ -1,3 +1,6 @@
-#trip-setter-datetime{
+#trip-setter-datetime-label{
     margin: 1em auto;
+    width: 17em;
+    padding: 0;
+    border: 1px solid black;
 }

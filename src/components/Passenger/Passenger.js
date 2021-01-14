@@ -14,11 +14,12 @@ export default class Passenger extends React.Component{
             searchAddress: false
         };
     }
+
     static contextType = AppContext;
 
     render(){
         return (
-            <section>
+            <section id="passenger-section">
                 <Route path="/passenger" component={Header}></Route>
 
                 <Route exact path="/passenger" component={HomeScreen}></Route>

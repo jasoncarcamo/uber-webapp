@@ -11,11 +11,16 @@ export default class DateTimePicker extends React.Component{
     }
 
     render(){
-        return <input 
-            id="trip-setter-datetime" 
-            type="datetime-local" 
-            name="scheduled_datetime" 
-            value={this.context.tripsContext.trip.scheduled_datetime} onChange={this.editDateTime} 
-            min={new Date()}/>;
+        return (
+            <label id="trip-setter-datetime-label" htmlFor="trip-setter-datetime">
+                For when?
+                <input 
+                    id="trip-setter-datetime" 
+                    type="datetime-local" 
+                    name="scheduled_date_time" 
+                    value={this.context.tripsContext.trip.scheduled_date_time} onChange={this.editDateTime} 
+                    min={new Date()}/>
+            </label>
+        )
     };
 };
