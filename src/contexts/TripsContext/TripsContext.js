@@ -5,6 +5,7 @@ const TripsContext = React.createContext({
     error: "",
     editTripInput: ()=>{},
     editTripLocations: ()=>{},
+    editTrip: ()=>{},
     cancelTrip: ()=>{},
     setError: ()=>{}
 });
@@ -25,7 +26,8 @@ export class TripsProvider extends React.Component{
                 distance: "",
                 duration: "",
                 scheduled_date_time: "",
-                request_confirmed: false
+                request_confirmed: false,
+                driver_accepted: ""
             },
             error: ""
         };
@@ -67,7 +69,8 @@ export class TripsProvider extends React.Component{
                 distance: "",
                 duration: "",
                 scheduled_date_time: "",
-                request_confirmed: false
+                request_confirmed: false,
+                driver_accepted: ""
             },
             error: ""
         });
@@ -89,6 +92,12 @@ export class TripsProvider extends React.Component{
         });
     }
 
+    editTrip = (trip)=>{
+        this.setState({
+            trip
+        });
+    }
+
     setError = (error)=>{
         this.setState({
             error
@@ -101,6 +110,7 @@ export class TripsProvider extends React.Component{
             error: this.state.error,
             editTripInput: this.editTripInput,
             editTripLocations: this.editTripLocations,
+            editTrip: this.editTrip,
             cancelTrip: this.cancelTrip,
             editDestinationInfo: this.editDestinationInfo,
             setError: this.setError

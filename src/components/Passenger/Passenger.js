@@ -6,6 +6,7 @@ import HomeScreen from "./HomeScreen/HomeScreen";
 import EditTripScreen from "./EditTripScreen/EditTripScreen";
 import RequestTripScreen from "./RequestTripScreen/RequestTripScreen";
 import TripConfirmedScreen from "./TripConfirmedScreen/TripConfirmedScreen";
+import MainTripScreen from "./MainTripScreen/MainTripScreen";
 
 export default class Passenger extends React.Component{
     constructor(props){
@@ -26,7 +27,7 @@ export default class Passenger extends React.Component{
                 <Route exact path="/passenger" component={HomeScreen}></Route>
                 <Route exact path="/passenger/edit_trip" component={EditTripScreen}></Route>
                 <Route exact path="/passenger/request_trip" component={RequestTripScreen}></Route>
-                <Route exact path="/passenger/trip_confirmed" component={TripConfirmedScreen}></Route>
+                <Route exact path="/passenger/trip" component={MainTripScreen}></Route>
             </section>
         );
     };
