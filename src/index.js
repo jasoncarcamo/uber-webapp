@@ -8,6 +8,7 @@ import AppContext, {AppProvider} from "./contexts/AppContext/AppContext";
 import MapContext, {MapProvider} from "./contexts/MapContext/MapContext";
 import PassengerContext, {PassengerProvider} from "./contexts/PassengerContext/PassengerContext";
 import TripsContext, {TripsProvider} from "./contexts/TripsContext/TripsContext";
+import DriverContext, {DriverProvider} from "./contexts/DriverContext/DriverContext";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -15,24 +16,31 @@ ReactDOM.render(
             <PassengerProvider>
                 <PassengerContext.Consumer>
                     { passengerContext => (
-                        <TripsProvider>
-                            <TripsContext.Consumer>
-                                { tripsContext => (
-                                    <MapProvider>
-                                        <MapContext.Consumer>
-                                            { mapContext => (
-                                                <AppProvider
-                                                    mapContext={mapContext}
-                                                    passengerContext={passengerContext}
-                                                    tripsContext={tripsContext}>
-                                                    <App/>
-                                                </AppProvider>
+                        <DriverProvider>
+                            <DriverContext.Consumer>
+                                { driverContext => (
+                                    <TripsProvider>
+                                        <TripsContext.Consumer>
+                                            { tripsContext => (
+                                                <MapProvider>
+                                                    <MapContext.Consumer>
+                                                        { mapContext => (
+                                                            <AppProvider
+                                                                mapContext={mapContext}
+                                                                passengerContext={passengerContext}
+                                                                tripsContext={tripsContext}
+                                                                driverContext={driverContext}>
+                                                                <App/>
+                                                            </AppProvider>
+                                                        )}
+                                                    </MapContext.Consumer>
+                                                </MapProvider>
                                             )}
-                                        </MapContext.Consumer>
-                                    </MapProvider>
+                                        </TripsContext.Consumer>
+                                    </TripsProvider>
                                 )}
-                            </TripsContext.Consumer>
-                        </TripsProvider>
+                            </DriverContext.Consumer>
+                        </DriverProvider>
                     )}
                 </PassengerContext.Consumer>
             </PassengerProvider>

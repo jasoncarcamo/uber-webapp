@@ -1,5 +1,6 @@
 import React from "react";
 import PassengerToken from "../../services/PassengerToken/PassengerToken";
+import AppContext from "../../contexts/AppContext/AppContext";
 
 export default class LogIn extends React.Component{
     constructor(props){
@@ -9,6 +10,8 @@ export default class LogIn extends React.Component{
             error: ""
         };
     };
+
+    static contextType = AppContext;
 
     componentDidMount(){
         if(PassengerToken.hasToken()){
@@ -22,7 +25,7 @@ export default class LogIn extends React.Component{
             password: "carcar"
         };
 
-        fetch("http://localhost:7000/api/login-driver", {
+        fetch("http://localhost:7000/api/login-passenger", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -46,6 +49,8 @@ export default class LogIn extends React.Component{
 
                 PassengerToken.setToken(resData.token);
 
+                this.setPassenger(resData.dbPassenger);
+
                 this.props.history.push("/passenger");
             })
             .catch( err => {
@@ -55,6 +60,11 @@ export default class LogIn extends React.Component{
                 });
             });
     }
+
+    setPassenger = (passenger)=>{
+        this.context.passengerContext.setPassenger(passenger);
+    }
+
     render(){
         return (
             <section>

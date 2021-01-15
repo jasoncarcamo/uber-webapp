@@ -33,8 +33,6 @@ export default class DirectionRenderer extends React.Component{
             loaded: true
         });
 
-        console.log(response);
-
         return;
     }
 

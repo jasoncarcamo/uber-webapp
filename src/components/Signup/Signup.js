@@ -1,5 +1,6 @@
 import React from "react";
 import PassengerToken from "../../services/PassengerToken/PassengerToken";
+import AppContext from "../../contexts/AppContext/AppContext";
 
 export default class Signup extends React.Component{
     constructor(props){
@@ -9,6 +10,8 @@ export default class Signup extends React.Component{
             error: ""
         };
     };
+
+    static contextType = AppContext;
 
     componentDidMount(){
         if(PassengerToken.hasToken()){
@@ -25,7 +28,7 @@ export default class Signup extends React.Component{
                 password: "carcar",
         }
 
-        fetch("http://localhost:7000/api/register-driver", {
+        fetch("http://localhost:7000/api/register-passenger", {
             method: "POST",
             headers: {
                 'content-type': "application/json"
@@ -50,6 +53,8 @@ export default class Signup extends React.Component{
 
                 PassengerToken.setToken(resData.token);
 
+                this.setPassenger(resData.createdPassenger);
+
                 this.props.history.push("/passenger");
             })
             .catch( err => {
@@ -58,6 +63,10 @@ export default class Signup extends React.Component{
                 });
             });
     };
+
+    setPassenger = (passenger)=>{
+        this.context.passengerCOntext.setPassenger(passenger);
+    }
     
     render(){
         return (

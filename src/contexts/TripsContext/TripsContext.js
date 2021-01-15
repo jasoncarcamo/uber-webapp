@@ -78,18 +78,29 @@ export class TripsProvider extends React.Component{
 
     editDestinationInfo = (response)=>{
         const trip = this.state.trip;
-        console.log(response)
+
         if(!response){
             return;
         }
 
         trip.distance = response.routes[0].legs[0].distance.text;
         trip.duration = response.routes[0].legs[0].duration.text;
+        trip.price = this.calculatePrice(trip.distance);
 
-        this.setState({
-            trip,
-            error: ""
-        });
+        this.editTrip(trip);
+    }
+
+    calculatePrice = (distance)=>{
+        let newDistance = Number(distance.split(" ")[0]);
+        let price = 6 + ( newDistance - 2);
+
+        if(!distance){
+            return "";
+        };
+
+        price = `$${Math.ceil(price)}`;
+
+        return price;
     }
 
     editTrip = (trip)=>{

@@ -48,7 +48,6 @@ export class MapProvider extends React.Component{
     }
 
     setLocation = (position)=>{
-        console.log(position)
         const newPassengerLocation = {
             lat: Number(position.coords.latitude),
             lng: Number(position.coords.longitude)

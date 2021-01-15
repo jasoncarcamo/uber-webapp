@@ -37,12 +37,16 @@ export default class ConfirmOptions extends React.Component{
     calculatePrice = (distance)=>{
         let newDistance = Number(distance.split(" ")[0]);
         let price = 6 + ( newDistance - 2);
+        const trip = this.context.tripsContext.trip;
 
         if(!distance){
             return "";
         };
+        price = `$${Math.ceil(price)}`;
+        
+        trip.price = price;
 
-        return `$${Math.ceil(price)}`;
+        return price;
     }
 
     renderTripInfo = ({tripsContext})=>{
@@ -52,7 +56,7 @@ export default class ConfirmOptions extends React.Component{
                 <p><strong>Drop off:</strong> {tripsContext.trip.drop_off_address}</p>
                 <p><strong>Distance:</strong> {tripsContext.trip.distance}</p>
                 <p><strong>Duration:</strong> {tripsContext.trip.duration}</p>
-                <p><strong>Price:</strong> {this.calculatePrice(tripsContext.trip.distance)}</p>
+                <p><strong>Price:</strong> {tripsContext.trip.price}</p>
 
                 {this.state.confirmTrip ? <button id="confirm-trip-info-button" onClick={this.requestTrip}>Confirm</button> : ""}
             </section>
@@ -76,7 +80,7 @@ export default class ConfirmOptions extends React.Component{
     }
     
     render(){
-        console.log(this.context);
+        
         return (
             <section id="confirm_trip_section">
                 {this.renderTripInfo(this.context)}
