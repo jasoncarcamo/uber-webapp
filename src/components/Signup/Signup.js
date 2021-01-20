@@ -65,7 +65,7 @@ export default class Signup extends React.Component{
     };
 
     setPassenger = (passenger)=>{
-        this.context.passengerCOntext.setPassenger(passenger);
+        this.context.passengerContext.setPassenger(passenger);
     }
     
     render(){
