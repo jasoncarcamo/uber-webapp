@@ -1,0 +1,29 @@
+#edit-account-form{
+    margin: 0;
+    padding: 0;
+    border: 10px solid green;
+}
+
+#edit-account-fieldset{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 21.15em;
+    margin: 0;
+    padding: 0;
+}
+
+.edit-account-label{
+    display: flex;
+    flex-direction: column;
+    margin: .5em 0;
+}
+
+.edit-account-input{
+    height: 2.8em;
+}

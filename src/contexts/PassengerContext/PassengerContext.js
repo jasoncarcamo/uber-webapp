@@ -22,10 +22,8 @@ export class PassengerProvider extends React.Component{
 
     componentDidMount(){
         if(PassengerToken.hasToken()){
-            console.log("I have token");
-
             this.getPassenger();
-        }
+        };
     }
 
     getPassenger = ()=>{
@@ -50,7 +48,7 @@ export class PassengerProvider extends React.Component{
                 this.setState({
                     error: err.error
                 });
-            })
+            });
     }
 
     setPassenger = (passenger)=>{
@@ -64,9 +62,9 @@ export class PassengerProvider extends React.Component{
     }
 
     setToDefault = ()=>{
-        this.setState({
-            passenger: {}
-        });
+        const passenger = {};
+
+        this.setPassenger(passenger);
     }
 
     render(){
@@ -77,7 +75,7 @@ export class PassengerProvider extends React.Component{
             editPassenger: this.editPassenger,
             setToDefault: this.setToDefault
         };
-
+        console.log(this.state.passenger)
         return (
             <PassengerContext.Provider value={value}>
                 {this.props.children}
