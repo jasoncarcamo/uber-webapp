@@ -7,6 +7,7 @@ export default class EditAccount extends React.Component{
         super(props);
         this.state = {
             passenger: {},
+            originalPassengerInfo: {},
             editSuccess: false
         }
     }
@@ -15,7 +16,8 @@ export default class EditAccount extends React.Component{
 
     componentDidMount(){
         this.setState({
-            passenger: Object.assign({}, this.context.passengerContext.passenger)
+            passenger: Object.assign({}, this.context.passengerContext.passenger),
+            originalPassengerInfo: this.context.passengerContext.passenger
         });
     }
 
@@ -29,12 +31,32 @@ export default class EditAccount extends React.Component{
         passenger[e.target.name] = e.target.value;
 
         this.setState({
-            passenger
+            passenger,
+            error: ""
         });
     }
 
     saveNewPassengerInfo = ()=>{
         const passenger = this.state.passenger;
+        const originalPassengerInfo = this.state.originalPassengerInfo;
+        let changed = false;
+        
+        for(const [key, value] of Object.entries(passenger)){
+
+            console.log(passenger[key], originalPassengerInfo[key]);
+
+            if(originalPassengerInfo[key] !== passenger[key]){
+                changed = true;
+            };
+        };
+
+        if(!changed){
+            this.setState({
+                error: "No changes have been made. Please make a change to save."
+            });
+
+            return;
+        };
 
         this.context.passengerContext.setPassenger(passenger);
 
@@ -106,6 +128,8 @@ export default class EditAccount extends React.Component{
 
                         name="work_address"/>
                     </label>
+
+                    <p>{this.state.error? this.state.error : ""}</p>
 
                     <button type="button" onClick={this.saveNewPassengerInfo}>Save</button>
                 </fieldset>
