@@ -1,6 +1,7 @@
 import React from "react";
 import AppContext from "../../../../contexts/AppContext/AppContext";
 import "./EditAccount.css";
+import PassengerToken from "../../../../services/PassengerToken/PassengerToken";
 
 export default class EditAccount extends React.Component{
     constructor(props){
@@ -50,6 +51,8 @@ export default class EditAccount extends React.Component{
             };
         };
 
+        console.log(passenger.mobile_number.includes(originalPassengerInfo.mobile_number));
+
         if(!changed){
             this.setState({
                 error: "No changes have been made. Please make a change to save."
@@ -58,9 +61,34 @@ export default class EditAccount extends React.Component{
             return;
         };
 
-        this.context.passengerContext.setPassenger(passenger);
+        fetch("http://localhost:7000/api/passenger-info", {
+            method: "POST",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${PassengerToken.getToken()}`
+            },
+            body: JSON.stringify(this.state.passenger)
+        })
+            .then( res => {
+                if(!res.ok){
+                    return res.json().then( e => Promise.reject(e));
+                };
 
-        this.props.toggleEditSuccess();
+                return res.json();
+            })
+            .then( resData => {
+                console.log(resData);
+                this.context.passengerContext.setPassenger(resData.updatedPassenger);
+
+                this.props.toggleEditSuccess();
+            })
+            .catch( err => {
+                console.log(err);
+
+                this.setState({
+                    error: err.error
+                });
+            });
     }
 
     render(){
@@ -103,7 +131,7 @@ export default class EditAccount extends React.Component{
                         type="text" 
                         onChange={this.editPassengerInput}
                         value={this.state.passenger.mobile_number}
-                        name="mobile_numer"/>
+                        name="mobile_number"/>
                     </label>
     
                     <label className="edit-account-label">

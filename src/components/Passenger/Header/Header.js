@@ -29,6 +29,11 @@ export default class Header extends React.Component{
         menuBurger.classList.remove("menu-burger-container-toggle");
     };
 
+    toHome = ()=>{
+        this.props.history.push("/passenger");
+        this.toggleMenuBurger();
+    }
+
     render(){
         return (
             <header id="menu-container">
@@ -39,7 +44,7 @@ export default class Header extends React.Component{
                 <nav>
                     <ul>
                         <li>
-                            <button>Home</button>
+                            <button onClick={this.toHome}>Home</button>
                         </li>
                         <li>
                             <button onClick={this.toAbout}>Account</button>

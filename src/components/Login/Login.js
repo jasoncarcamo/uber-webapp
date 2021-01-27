@@ -21,7 +21,7 @@ export default class LogIn extends React.Component{
 
     handleLogin = ()=>{
         const driverTest = {
-            mobile_number: 6317030168,
+            email: "jasoncarcamo30@yahoo.com",
             password: "carcar"
         };
 
@@ -31,7 +31,7 @@ export default class LogIn extends React.Component{
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                mobile_number: driverTest.mobile_number,
+                email: driverTest.email,
                 password: driverTest.password
             })
         })
