@@ -33,13 +33,10 @@ export class TripsProvider extends React.Component{
         };
     };
 
-    editTripInput = ({target})=>{
-        const editTrip = this.state.trip;
-
-        editTrip[target.name] = target.value;
-
+    editTripInput = (newTrip)=>{
+        
         this.setState({
-            trip: editTrip,
+            trip: newTrip,
             error: ""
         });
     }
@@ -126,7 +123,7 @@ export class TripsProvider extends React.Component{
             editDestinationInfo: this.editDestinationInfo,
             setError: this.setError
         };
-        
+        console.log(this.state.trip)
         return (
             <TripsContext.Provider value={value}>
                 {this.props.children}

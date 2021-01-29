@@ -44,14 +44,10 @@ export default class EditAccount extends React.Component{
         
         for(const [key, value] of Object.entries(passenger)){
 
-            console.log(passenger[key], originalPassengerInfo[key]);
-
             if(originalPassengerInfo[key] !== passenger[key]){
                 changed = true;
             };
         };
-
-        console.log(passenger.mobile_number.includes(originalPassengerInfo.mobile_number));
 
         if(!changed){
             this.setState({
@@ -77,13 +73,11 @@ export default class EditAccount extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData);
                 this.context.passengerContext.setPassenger(resData.updatedPassenger);
 
                 this.props.toggleEditSuccess();
             })
             .catch( err => {
-                console.log(err);
 
                 this.setState({
                     error: err.error
@@ -92,7 +86,7 @@ export default class EditAccount extends React.Component{
     }
 
     render(){
-        console.log(this.context.passengerContext.passenger, this.state.passenger)
+        
         return (
             <form id="edit-account-form">
                 <fieldset id="edit-account-fieldset">
