@@ -2,6 +2,7 @@ import React from "react";
 import AppContext from "../../../../contexts/AppContext/AppContext";
 import "./EditAccount.css";
 import PassengerToken from "../../../../services/PassengerToken/PassengerToken";
+import PlacesAutocomplete from "../../PlacesAutocomplete/PlacesAutocomplete";
 
 export default class EditAccount extends React.Component{
     constructor(props){
@@ -30,6 +31,17 @@ export default class EditAccount extends React.Component{
         const passenger = this.state.passenger;
 
         passenger[e.target.name] = e.target.value;
+
+        this.setState({
+            passenger,
+            error: ""
+        });
+    }
+
+    editInput = (address, name)=>{
+        const passenger = this.state.passenger;
+
+        passenger[name] = address;
 
         this.setState({
             passenger,
@@ -86,7 +98,7 @@ export default class EditAccount extends React.Component{
     }
 
     render(){
-        
+        console.log(this.state);
         return (
             <form id="edit-account-form">
                 <fieldset id="edit-account-fieldset">
@@ -130,25 +142,26 @@ export default class EditAccount extends React.Component{
     
                     <label className="edit-account-label">
                         Home address:
-                        <input 
-                        id="" 
-                        className="edit-account-input" 
-                        type="text" 
-                        onChange={this.editPassengerInput}
-                        value={this.state.passenger.home_address || ""}
-                        name="home_address"/>
+                        <PlacesAutocomplete
+                            id="" 
+                            className="edit-account-input" 
+                            type="text" 
+                            onChange={this.editInput}
+                            editInput={this.editInput}
+                            value={this.state.passenger.home_address}
+                            name="home_address"/>
                     </label>
 
                     <label className="edit-account-label">
                         Work address:
-                        <input 
-                        id="" 
-                        className="edit-account-input" 
-                        type="text" 
-                        onChange={this.editPassengerInput}
-                        value={this.state.passenger.work_address || ""}
-
-                        name="work_address"/>
+                        <PlacesAutocomplete
+                            id="" 
+                            className="edit-account-input" 
+                            type="text" 
+                            onChange={this.editInput}
+                            editInput={this.editInput}
+                            value={this.state.passenger.work_address}
+                            name="work_address"/>
                     </label>
 
                     <p>{this.state.error? this.state.error : ""}</p>

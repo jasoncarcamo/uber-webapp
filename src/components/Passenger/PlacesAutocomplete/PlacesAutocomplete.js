@@ -7,7 +7,6 @@ export default class PlacesAutocomplete extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            trip: {}
         }
     }
 
@@ -19,7 +18,12 @@ export default class PlacesAutocomplete extends React.Component{
 
         geocodeByAddress(address)
             .then( results => getLatLng(results[0]))
-            .then( latLng => {               
+            .then( latLng => {       
+                
+                if(!this.props.editTripLocations){
+                    return;
+                };
+
                 this.props.editTripLocations(this.props.name, latLng);
             })
             .catch( error => {
@@ -28,7 +32,7 @@ export default class PlacesAutocomplete extends React.Component{
     };
 
     render(){
-        console.log(this.state, this.context)
+        console.log(this.context)
         return (
             <PlacesAutoComplete
                 name={this.props.name}
