@@ -78,6 +78,10 @@ export default class DestinationSetters extends React.Component{
         this.context.tripsContext.editTripLocations(location);
     }
 
+    goToAccount = ()=>{
+        this.props.history.push("/passenger/account")
+    }
+
     setPickUpHome = (e)=>{
         const trip = this.context.tripsContext.trip;
         const passenger = this.context.passengerContext.passenger;
@@ -118,7 +122,7 @@ export default class DestinationSetters extends React.Component{
         if(passenger.home_address){
             return <button type="button" onClick={this.setPickUpHome}>Pick up at home</button>;
         } else{
-            return <button type="button" >Set home address</button>;
+            return <button type="button" onClick={this.goToAccount}>Set home address</button>;
         };
     }
 
@@ -128,7 +132,7 @@ export default class DestinationSetters extends React.Component{
         if(passenger.home_address){
             return <button type="button" onClick={this.setDropOffHome}>Drop off at home</button>;
         } else{
-            return <button type="button" >Set home address</button>;
+            return <button type="button" onClick={this.goToAccount}>Set home address</button>;
         };
     }
 
