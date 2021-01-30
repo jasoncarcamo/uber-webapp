@@ -19,17 +19,30 @@ export default class PlacesAutocomplete extends React.Component{
         geocodeByAddress(address)
             .then( results => getLatLng(results[0]))
             .then( latLng => {       
-                
-                if(!this.props.editTripLocations){
-                    return;
-                };
-
-                this.props.editTripLocations(this.props.name, latLng);
+                this.editTripContextLocation(latLng);
             })
             .catch( error => {
                 console.log(error);
             });
     };
+
+    editTripContextLocation = (latLng)=>{
+        let name = this.props.name.split("_");
+        let position = latLng;
+        const location = {};
+
+        name.splice(name.length - 1, 1);
+
+        for(const [key, value] of Object.entries(position)){
+
+            location[`${name.join("_")}_${key}`] = value;
+
+        };
+
+        console.log(location);
+
+        this.context.tripsContext.editTripLocations(location);
+    }
 
     render(){
         console.log(this.context)

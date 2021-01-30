@@ -67,7 +67,7 @@ export default class EditTripScreen extends React.Component{
                 <form id="trip-settings-form">
                     <fieldset id="trip-settings-fieldset">
                         
-                        <DestinationSetters/>
+                        <DestinationSetters history={this.props.history}/>
                         <DateTimePicker/>
 
                         <p className="requirements-error">{this.displayError(this.context)}</p>

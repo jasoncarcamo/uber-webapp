@@ -47,7 +47,7 @@ export class TripsProvider extends React.Component{
         for(const [key, value] of Object.entries(location)){
             trip[key] = value;
         };
-
+        console.log(trip)
         this.setState({
             trip,
             error: ""
