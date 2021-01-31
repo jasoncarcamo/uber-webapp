@@ -26,10 +26,13 @@ export default class TripInfo extends React.Component{
         return (
             <section id="main-trip-info-section">
                 <div id="drag-bar">---------</div>
+
+                
                 <section id="">
-                    <p>Pick up address: {this.context.tripsContext.trip.distance}</p>
+                    <p>Pick up address: {this.context.tripsContext.trip.pick_up_address}</p>
                     <p>Drop off address: {this.context.tripsContext.trip.drop_off_address}</p>
                     <p>Distance: {this.context.tripsContext.trip.distance}</p>
+                    <p>Estmated time: {this.context.tripsContext.trip.duration}</p>
                     <p>Price: {this.context.tripsContext.trip.price}</p>
                 </section>
 

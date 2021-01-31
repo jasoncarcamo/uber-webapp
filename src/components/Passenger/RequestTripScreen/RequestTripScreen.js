@@ -10,13 +10,11 @@ export default class RequestTripScreen extends React.Component{
 
     renderTripConfirmed = ({tripsContext})=>{
         if(tripsContext.trip.request_confirmed){
-            return <TripConfirmed history={this.props.history}/>
+            return <TripConfirmed history={this.props.history}/>;
         };
 
         return "";
     }
-
-
 
     render(){
         return (

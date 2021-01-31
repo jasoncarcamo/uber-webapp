@@ -136,6 +136,60 @@ export default class DestinationSetters extends React.Component{
         };
     }
 
+    setPickUpWork = (e)=>{
+        const trip = this.context.tripsContext.trip;
+        const passenger = this.context.passengerContext.passenger;
+
+        e.preventDefault();
+
+        trip.pick_up_address = passenger.work_address;
+
+        this.getPosition(trip.pick_up_address, "pick_up_address");
+
+        this.setState({
+            trip
+        });
+
+        this.context.tripsContext.editTripInput(trip);
+    }
+
+    setDropOffWork = (e)=>{
+        const trip = this.context.tripsContext.trip;
+        const passenger = this.context.passengerContext.passenger;
+
+        e.preventDefault();
+
+        trip.drop_off_address = passenger.work_address;
+
+        this.getPosition(trip.drop_off_address, "drop_off_address");
+
+        this.setState({
+            trip
+        });
+
+        this.context.tripsContext.editTripInput(trip);
+    }
+
+    renderPickUpWork = ()=>{
+        const passenger = this.context.passengerContext.passenger;
+
+        if(passenger.work_address){
+            return <button type="button" onClick={this.setPickUpWork}>Pick up at work</button>;
+        } else{
+            return <button type="button" onClick={this.goToAccount}>Set work address</button>;
+        };
+    }
+
+    renderDropOffWork = ()=>{
+        const passenger = this.context.passengerContext.passenger;
+
+        if(passenger.work_address){
+            return <button type="button" onClick={this.setDropOffWork}>Drop off at work</button>;
+        } else{
+            return <button type="button" onClick={this.goToAccount}>Set work address</button>;
+        };
+    }
+
     render(){
         console.log(this.state.trip);
         return (
@@ -146,6 +200,7 @@ export default class DestinationSetters extends React.Component{
                         <PlacesAutocomplete id="pick_up_address_input" className="trip-settings-input" type="text" placeholder="Enter pickup location" name="pick_up_address" value={this.state.trip.pick_up_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
 
                         {this.renderPickUpHome()}
+                        {this.renderPickUpWork()}
                     </label>
                 </div>
                 
@@ -155,6 +210,7 @@ export default class DestinationSetters extends React.Component{
                         <PlacesAutocomplete id="drop_off_address_input" className="trip-settings-input" type="text" placeholder="Where to?" name="drop_off_address" value={this.state.trip.drop_off_address} editInput={this.editInput} editTripLocations={this.editTripLocations}/>
 
                         {this.renderDropOffHome()}
+                        {this.renderDropOffWork()}
                     </label>
                 </div>
             </>
