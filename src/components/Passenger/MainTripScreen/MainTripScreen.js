@@ -1,7 +1,7 @@
 import React from "react";
 import Map from "../Map/Map";
 import AppContext from "../../../contexts/AppContext/AppContext";
-import TripInfo from "./TripInfo/TripInfo";
+import TripInfoContainer from "./TripInfoContainer/TripInfoContainer";
 import "./MainTripScreen.css";
 
 export default class MainTripScreen extends React.Component{
@@ -25,7 +25,7 @@ export default class MainTripScreen extends React.Component{
         return (
             <section id="main-trip-section">
                 <Map mapContainerStyle={mapContainerStyle}/>
-                <TripInfo history={this.props.history}/>
+                <TripInfoContainer history={this.props.history}/>
             </section>
         );
     };
