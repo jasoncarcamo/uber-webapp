@@ -1,4 +1,5 @@
 import React from "react";
+import TripInstanceService from "../../services/TripInstanceService/TripInstanceService";
 
 const TripsContext = React.createContext({
     trip: {},
@@ -32,6 +33,20 @@ export class TripsProvider extends React.Component{
             error: ""
         };
     };
+
+    componentDidMount(){
+        this.loadTripFromStorage();
+    }
+
+    loadTripFromStorage = ()=>{
+        const trip = TripInstanceService.getTrip();
+
+        if(trip){
+            this.setState({
+                trip
+            });
+        };
+    }
 
     editTripInput = (newTrip)=>{
         

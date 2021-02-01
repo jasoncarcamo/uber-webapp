@@ -1,4 +1,5 @@
 import React from "react";
+import TripInstanceService from "../../services/TripInstanceService/TripInstanceService";
 
 const MapContext = React.createContext({
     passengerLocation: {},
@@ -22,7 +23,20 @@ export class MapProvider extends React.Component{
 
     componentDidMount(){
         this.watchLocation();
+        this.loadTripFromStorage();
     };
+
+    loadTripFromStorage = ()=>{
+        const trip = TripInstanceService.getTrip();
+
+        if(!trip){
+            return;
+        };
+
+        if(trip.pick_up_address && trip.drop_off_address){
+            this.toggleDirections(true);
+        };
+    }
 
     postionError = (error)=>{
         console.log(error);

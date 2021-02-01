@@ -26,6 +26,8 @@ export default class Map extends React.Component{
         const origin = this.context.tripsContext.trip.pick_up_address;
         const destination = this.context.tripsContext.trip.drop_off_address;
 
+        console.log(origin)
+
         return <DirectionRenderer origin={origin} destination={destination}/>;
     }
 

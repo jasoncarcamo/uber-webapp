@@ -13,6 +13,8 @@ export default class TripSetter extends React.Component{
 
     static contextType = AppContext;
 
+    
+
     displayValue = ({tripsContext})=>{
         return tripsContext.trip.pick_up_address ? tripsContext.trip.pick_up_address : "";
     }
