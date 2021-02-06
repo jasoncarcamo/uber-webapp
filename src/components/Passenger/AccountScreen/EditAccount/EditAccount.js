@@ -70,7 +70,7 @@ export default class EditAccount extends React.Component{
         };
 
         fetch("http://localhost:7000/api/passenger-info", {
-            method: "POST",
+            method: "PATCH",
             headers: {
                 'content-type': "application/json",
                 'authorization': `bearer ${PassengerToken.getToken()}`

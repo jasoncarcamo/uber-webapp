@@ -3,6 +3,7 @@ import TripInstanceService from "../../services/TripInstanceService/TripInstance
 
 const TripsContext = React.createContext({
     trip: {},
+    driver: {},
     error: "",
     editTripInput: ()=>{},
     editTripLocations: ()=>{},
@@ -30,6 +31,7 @@ export class TripsProvider extends React.Component{
                 request_confirmed: false,
                 driver_accepted: ""
             },
+            driver: {},
             error: ""
         };
     };
@@ -130,6 +132,7 @@ export class TripsProvider extends React.Component{
     render(){
         const value = {
             trip: this.state.trip,
+            driver: this.state.driver,
             error: this.state.error,
             editTripInput: this.editTripInput,
             editTripLocations: this.editTripLocations,
