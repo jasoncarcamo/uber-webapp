@@ -2,6 +2,7 @@ import React from "react";
 import "./ConfirmOptions.css";
 import AppContext from "../../../../contexts/AppContext/AppContext";
 import TripInstanceService from "../../../../services/TripInstanceService/TripInstanceService";
+import PassengerToken from "../../../../services/PassengerToken/PassengerToken";
 
 export default class ConfirmOptions extends React.Component{
     constructor(props){
@@ -17,10 +18,43 @@ export default class ConfirmOptions extends React.Component{
         const trip = this.context.tripsContext.trip;
 
         trip.request_confirmed = true;
-        // save instance of requested trip
-        TripInstanceService.saveTrip(trip);   
 
-        this.context.tripsContext.editTrip(trip)
+        trip.scheduled = true;
+
+        trip.time_requested = trip.scheduled_date_time;
+
+        trip.zip_code = "11701";
+
+        trip.date_created = new Date();
+
+        fetch("http://localhost:7000/api/trips", {
+            method: "POST",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${PassengerToken.getToken()}`
+            },
+            body: JSON.stringify(trip)
+        })
+            .then( res => {
+                if(!res.ok){
+                    return res.json().then( e => Promise.reject(e));
+                };
+
+                return res.json();
+            })
+            .then( resData => {
+                console.log(resData);
+                // save instance of requested trip
+                TripInstanceService.saveTrip(trip);   
+
+                this.context.tripsContext.editTrip(trip)
+            })
+            .catch( err => {
+                console.log(err);
+                this.setState({
+                    error: err.error
+                });
+            });
     }
 
     cancelTrip = ()=>{
