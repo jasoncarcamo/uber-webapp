@@ -44,15 +44,23 @@ export default class DestinationSetters extends React.Component{
 
         };
 
+        console.log(location);
+
         this.context.tripsContext.editTripLocations(location);
     }
 
     getPosition = (address, propName)=>{
+        let zip_code;
         console.log(address, propName)
         geocodeByAddress(address)
-            .then( results => getLatLng(results[0]))
+            .then( results => {
+                zip_code = results[0].address_components[7].short_name;
+
+                return getLatLng(results[0]);
+            })
             .then( latLng => {   
-                console.log(latLng)    
+                latLng.zip_code = zip_code;
+
                 this.editTripContextLocation(latLng, propName);
             })
             .catch( error => {

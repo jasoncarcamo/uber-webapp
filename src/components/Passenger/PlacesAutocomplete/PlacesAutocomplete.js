@@ -18,7 +18,8 @@ export default class PlacesAutocomplete extends React.Component{
 
         geocodeByAddress(address)
             .then( results => getLatLng(results[0]))
-            .then( latLng => {       
+            .then( latLng => {  
+                console.log(latLng)     
                 this.editTripContextLocation(latLng);
             })
             .catch( error => {
@@ -31,6 +32,7 @@ export default class PlacesAutocomplete extends React.Component{
         let position = latLng;
         const location = {};
 
+        console.log(position)
         name.splice(name.length - 1, 1);
 
         for(const [key, value] of Object.entries(position)){

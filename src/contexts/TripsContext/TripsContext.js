@@ -60,7 +60,7 @@ export class TripsProvider extends React.Component{
 
     editTripLocations = (location)=>{
         const trip = this.state.trip;
-
+        console.log(location)
         for(const [key, value] of Object.entries(location)){
             trip[key] = value;
         };

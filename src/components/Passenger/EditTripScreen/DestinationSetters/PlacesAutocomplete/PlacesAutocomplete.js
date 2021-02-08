@@ -5,13 +5,18 @@ import "./PlacesAutocomplete.css";
 export default class PlacesAutocomplete extends React.Component{
 
     handleChange = (address)=>{
-
+        let zip_code;
         this.props.editInput(address, this.props.name);
 
         geocodeByAddress(address)
-            .then( results => getLatLng(results[0]))
+            .then( results => {
+                zip_code = results[0].address_components[7].short_name;
+
+                return getLatLng(results[0]);
+            })
             .then( latLng => {
-                
+                latLng.zip_code = zip_code;
+        
                 this.props.editTripLocations(this.props.name, latLng);
 
             })

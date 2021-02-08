@@ -45,7 +45,7 @@ export class MapProvider extends React.Component{
     options = {
         enableHighAccuracy: true,
         timeout: 10000,
-        maxiumAge: 0
+        maxiumAge: 10000
     };
 
     getLocation = ()=>{
