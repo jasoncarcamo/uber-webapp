@@ -2,6 +2,7 @@ import React from "react";
 import "./CancelTrip.css";
 import TripInstanceService from "../../../../../services/TripInstanceService/TripInstanceService";
 import AppContext from "../../../../../contexts/AppContext/AppContext";
+import PassengerToken from "../../../../../services/PassengerToken/PassengerToken";
 
 export default class CancelTrip extends React.Component{
     constructor(props){
@@ -25,9 +26,37 @@ export default class CancelTrip extends React.Component{
     };
 
     handleCancel = ()=>{
-        this.setState({
-            cancelSuccess: true
+        const id = this.context.tripsContext.trip.id;
+
+        fetch(`http://localhost:7000/api/trip/${id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `bearer ${PassengerToken.getToken()}`
+            }
         })
+            .then( res => {
+                if(!res.ok){
+                    return res.json().then( e => Promise.reject(e));
+                };
+
+                return res.json();
+            })
+            .then( resData => {
+                TripInstanceService.removeTrip();
+
+                this.context.tripsContext.cancelTrip();
+
+                this.context.mapContext.toggleDirections(false);
+                this.setState({
+                    cancelSuccess: true
+                });
+            })
+            .catch( err => {
+                this.setState({
+                    error: err.error
+                });
+            });
     }
 
     renderCancelOptions = ()=>{
@@ -43,12 +72,6 @@ export default class CancelTrip extends React.Component{
     }
 
     cancelSuccess = ()=>{
-        TripInstanceService.removeTrip();
-
-        this.context.tripsContext.cancelTrip();
-
-        this.context.mapContext.toggleDirections(false);
-
         this.props.history.push("/");
     }
 
@@ -62,6 +85,7 @@ export default class CancelTrip extends React.Component{
     }
 
     render(){
+        console.log(this.context.tripsContext, this.context)
         return (
             <section id="cancel-trip-section">
                 {!this.state.cancel && !this.state.cancelSuccess ? this.renderCancelButton() : ""}

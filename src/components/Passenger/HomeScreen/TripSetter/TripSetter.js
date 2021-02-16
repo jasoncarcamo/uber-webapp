@@ -1,6 +1,6 @@
 import React from "react";
 import "./TripSetter.css";
-import TripSettingsScreen from "../../EditTripScreen/EditTripScreen";
+import TripInstanceToken from "../../../../services/TripInstanceService/TripInstanceService";
 import AppContext from "../../../../contexts/AppContext/AppContext";
 
 export default class TripSetter extends React.Component{
@@ -13,14 +13,14 @@ export default class TripSetter extends React.Component{
 
     static contextType = AppContext;
 
-    
-
     displayValue = ({tripsContext})=>{
         return tripsContext.trip.pick_up_address ? tripsContext.trip.pick_up_address : "";
     }
 
     cancelTrip = ()=>{
         this.context.tripsContext.cancelTrip();
+
+        TripInstanceToken.removeTrip();
 
         this.context.mapContext.toggleDirections(false);
     }

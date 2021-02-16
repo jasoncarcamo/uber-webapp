@@ -45,9 +45,9 @@ export default class ConfirmOptions extends React.Component{
             .then( resData => {
                 console.log(resData);
                 // save instance of requested trip
-                TripInstanceService.saveTrip(trip);   
+                TripInstanceService.saveTrip(resData.createdTrip);   
 
-                this.context.tripsContext.editTrip(trip)
+                this.context.tripsContext.editTrip(resData.createdTrip)
             })
             .catch( err => {
                 console.log(err);

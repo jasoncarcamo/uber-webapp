@@ -38,13 +38,13 @@ export default class Map extends React.Component{
         } = tripsContext.trip;
 
         const tripPickUpLocation = {
-            lat: pick_up_lat,
-            lng: pick_up_lng,
+            lat: Number(pick_up_lat),
+            lng: Number(pick_up_lng),
         };
 
         const tripDropOffLocation = {
-            lat: drop_off_lat,
-            lng: drop_off_lng
+            lat: Number(drop_off_lat),
+            lng: Number(drop_off_lng)
         };
 
         const directions = {
@@ -54,6 +54,7 @@ export default class Map extends React.Component{
 
         for(const [key, value] of Object.entries(directions)){
             for(const [directionKey, directionValue] of Object.entries(directions[key])){
+                console.log(directionValue)
                 if(!directionValue){
                     return;
                 }

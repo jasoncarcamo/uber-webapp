@@ -42,7 +42,6 @@ export default class DirectionRenderer extends React.Component{
                 options={{
                     directions: this.state.response
                 }}>
-                
             </DirectionsRenderer>
         );
     }

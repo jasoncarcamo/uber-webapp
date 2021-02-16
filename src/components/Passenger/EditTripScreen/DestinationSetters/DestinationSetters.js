@@ -54,7 +54,13 @@ export default class DestinationSetters extends React.Component{
         console.log(address, propName)
         geocodeByAddress(address)
             .then( results => {
-                zip_code = results[0].address_components[7].short_name;
+                let length = results[0].address_components.length;
+
+                 if(length >= 9){
+                     length -= 1;
+                 };
+                
+                zip_code = results[0].address_components[length - 1].long_name;
 
                 return getLatLng(results[0]);
             })

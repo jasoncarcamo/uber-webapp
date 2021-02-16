@@ -20,6 +20,7 @@ export default class TripInfo extends React.Component{
     }
     
     render(){
+        
         return (
             <section id="">
                 <p>Pick up address: {this.context.tripsContext.trip.pick_up_address}</p>
